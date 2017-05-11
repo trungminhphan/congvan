@@ -1,0 +1,75 @@
+@media screen and (max-width: 1920px){
+	.pdf-menu {
+	  background: #f9f9f9;
+	  height: 50px;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.02);
+	  overflow: hidden;
+	  -webkit-touch-callout: none;
+	  -webkit-user-select: none;
+	  -khtml-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
+	.pdf-menu > div {
+	  float: left;
+	  font-size: 20px;
+	  text-shadow: 0 1px 0 #fff;
+	  color: #666;
+	  line-height: 50px;
+	  padding: 0 10px;
+	  border-right: 1px solid rgba(0, 0, 0, 0.15);
+	  cursor: pointer;
+	}
+}
+
+/*iphone 6*/
+@media screen and (max-width: 800px){
+	.pdf-menu {
+	  background: #f9f9f9;
+	  height: 130px;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.02);
+	  overflow: hidden;
+	  -webkit-touch-callout: none;
+	  -webkit-user-select: none;
+	  -khtml-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
+	.pdf-menu > div {
+	  float: left;
+	  text-shadow: 0 1px 0 #fff;
+	  color: #666;
+	  line-height:130px;
+	  padding: 0px 30px 0px 30px;
+	  border-right: 1px solid rgba(0, 0, 0, 0.15);
+	  cursor: pointer;
+	}
+	.pdf-menu .logo-img img{
+	    height: 100px;
+	}
+	#container,
+	#wrapper {
+	  margin: 120px auto;
+	  width: 1024px;
+
+	}
+	.document-viewer{
+		width: 1024px;
+	}
+	.mif-2x {
+	  font-size: 6.5rem !important;
+	  vertical-align: -35% !important;
+	}
+}
