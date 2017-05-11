@@ -18,16 +18,10 @@ if(isset($cv['id_donvisoanthao']) && $cv['id_donvisoanthao']){
 }
 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 $mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'mail.agu.edu.vn';  // Specify main and backup SMTP servers
+$mail->Host = '*****';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                        // Enable SMTP authentication
-/*$mail->Username = 'pmtrung@agu.edu.vn';                 // SMTP username
-$mail->Password = '882564';                           // SMTP password
-$mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 587;                         // TCP port to connect to
-$mail->CharSet = 'UTF-8';
-$mail->setFrom('pmtrung@agu.edu.vn', 'Phan Minh Trung');*/
-$mail->Username = 'ado@agu.edu.vn';                 // SMTP username
-$mail->Password = 'angiang2017';                           // SMTP password
+$mail->Username = '*****';                 // SMTP username
+$mail->Password = '*****';                           // SMTP password
 $mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                         // TCP port to connect to
 $mail->CharSet = 'UTF-8';
