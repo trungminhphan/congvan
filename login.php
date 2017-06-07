@@ -28,11 +28,11 @@ if(isset($_POST['login'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Quản lý học viên.">
-    <meta name="keywords" content="Trung tâm Tin học Trường Đại học An Giang">
+    <meta name="description" content="Quản lý công văn - Trường Đại học An Giang.">
+    <meta name="keywords" content="Quản lý công văn, Trung tâm Tin học Trường Đại học An Giang">
     <meta name="author" content="Phan Minh Trung">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-    <title>Hệ thống quản lý học viên</title>
+    <title>Quản lý công văn - Trường Đại học An Giang</title>
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/metro-icons.css" rel="stylesheet">
     <link href="css/metro-responsive.css" rel="stylesheet">
