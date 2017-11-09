@@ -10,6 +10,7 @@ class CongVan{
 	public $trichyeu = '' ;
 	public $socongvan = '';
 	public $sothutu = '';
+	public $nguoiky = '';
 	public $ngayky = '';
 	public $ngaydiden = '';
 	public $thoihanbaocao = ''; 
@@ -59,6 +60,7 @@ class CongVan{
 						'trichyeu' => $this->trichyeu,
 						'socongvan' => $this->socongvan,
 						'sothutu' => $this->sothutu,
+						'nguoiky' => $this->nguoiky,
 						'ngayky' => $this->ngayky,
 						'ngaydiden' => $this->ngaydiden,
 						'thoihanbaocao' => $this->thoihanbaocao,
@@ -82,6 +84,7 @@ class CongVan{
 						'trichyeu' => $this->trichyeu,
 						'socongvan' => $this->socongvan,
 						'sothutu' => $this->sothutu,
+						'nguoiky' => $this->nguoiky,
 						'ngayky' => $this->ngayky,
 						'ngaydiden' => $this->ngaydiden,
 						'thoihanbaocao' => $this->thoihanbaocao,

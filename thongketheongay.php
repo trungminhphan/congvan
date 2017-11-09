@@ -1,8 +1,19 @@
 <?php require_once('header.php');
 $congvan = new CongVan();$loaicongvan = new LoaiVanBan();
+$root_list = $loaicongvan->get_list_condition(array('id_parent' => ''));
+
 if(isset($_GET['submit'])){
+	$arr_query = array();$arr_congvan = array();
 	$tungay = isset($_GET['tungay']) ? $_GET['tungay'] : '';
 	$denngay = isset($_GET['denngay']) ? $_GET['denngay'] : '';
+	$id_loaicongvan = isset($_GET['id_loaicongvan']) ? $_GET['id_loaicongvan'] : '';
+	if($id_loaicongvan){
+		$list_congvan = $loaicongvan->get_list_condition(array('id_parent' => new MongoId($id_loaicongvan)));
+		foreach ($list_congvan as $key => $value) {
+			$arr_congvan[] = new MongoId($value['_id']);
+		}
+		array_push($arr_query, array('id_loaicongvan' => array('$in' => $arr_congvan)));
+	}
 
 	if(convert_date_dd_mm_yyyy($tungay) > convert_date_dd_mm_yyyy($denngay)){
 		$msg = 'Chọn sai ngày....';
@@ -12,16 +23,23 @@ if(isset($_GET['submit'])){
 		//$query = array(array('ngaydiden' => array('$gte' => $date1), 'ngaydiden' => array('$lte' => $date2)));
 		//$query = array('ngaydiden' => array('$gte' => $date1));
 		//$query = array('ngaydiden' => array('$lte' => $date2));
-		$query = array('$and' => array(array('ngaydiden' => array('$gte' => $date1)), array('ngaydiden' => array('$lte' => $date2))));
+		//if($id_loaicongvan){
+	//		array_push($arr_query, array('id_'))
+	//	}
+		array_push($arr_query, array('ngaydiden' => array('$gte' => $date1)));
+		array_push($arr_query, array('ngaydiden' => array('$lte' => $date2)));
+		$query = array('$and' => $arr_query);
+		//$query = array('$and' => array(array('ngaydiden' => array('$gte' => $date1)), array('ngaydiden' => array('$lte' => $date2))));
 		$list = $congvan->get_list_condition($query);
 	}
 }
 ?>
+<script type="text/javascript" src="js/select2.min.js"></script>
 <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/jquery.inputmask.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".ngaythangnam").inputmask();
+		$(".ngaythangnam").inputmask();$(".select2").select2();
 		<?php if(isset($msg) && $msg): ?>
 			$.Notify({type: 'alert', caption: 'Thông báo', content: <?php echo "'".$msg."'"; ?>});
 		<?php endif; ?>
@@ -32,14 +50,27 @@ if(isset($_GET['submit'])){
 <div class="grid example">
 	<div class="row cells12">
 		<div class="cell colspan2 padding-top-10 align-right">Từ ngày</div>
-		<div class="cell colspan4 input-control text" data-role="datepicker" data-format="dd/mm/yyyy">
+		<div class="cell colspan2 input-control text" data-role="datepicker" data-format="dd/mm/yyyy">
 			<input type="text" name="tungay" id="tungay" placeholder="Từ ngày" data-inputmask="'alias': 'date'" class="ngaythangnam" data-validate-func="required" value="<?php echo isset($tungay) ? $tungay : date("d/m/Y"); ?>" />
 			<span class="input-state-error mif-warning"></span><span class="input-state-success mif-checkmark"></span>
 		</div>
 		<div class="cell colspan2 padding-top-10 align-right">Đến ngày</div>
-		<div class="cell colspan4 input-control text" data-role="datepicker" data-format="dd/mm/yyyy">
+		<div class="cell colspan2 input-control text" data-role="datepicker" data-format="dd/mm/yyyy">
 			<input type="text" name="denngay" id="denngay" placeholder="Đến ngày" data-inputmask="'alias': 'date'" class="ngaythangnam" data-validate-func="required" value="<?php echo isset($denngay) ? $denngay : date("d/m/Y", strtotime("+7 day", strtotime(date("Y-m-d")))); ?>"/>
 			<span class="input-state-error mif-warning"></span><span class="input-state-success mif-checkmark"></span>
+		</div>
+		<div class="cell colspan4 input-control select">
+			<select name="id_loaicongvan" id="id_loaicongvan" class="select2">
+				<option value="">Chọn loại công văn</option>
+				<?php
+				if($root_list){
+					foreach ($root_list as $lv) {
+						echo '<option value="'. $lv['_id'].'"'.($lv['_id']==$id_loaicongvan ? ' selected' : '').'>'.$lv['ten'].'</option>';
+						
+					}
+				}
+				?>
+			</select>
 		</div>
 	</div>
 	<div class="row cells12">

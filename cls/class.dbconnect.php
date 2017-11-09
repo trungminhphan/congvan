@@ -12,7 +12,7 @@ class DBConnect{
 		//$connectionString = sprintf('mongodb://%s:%s@%s:%d',DBConnect::USERNAME, DBConnect::PASSWORD, DBConnect::HOST, DBConnect::PORT);
 		$connectionString = sprintf('mongodb://%s:%d', DBConnect::HOST, DBConnect::PORT);
 		try {
-			$this->connection = new Mongo($connectionString);
+			$this->connection = new MongoClient($connectionString);
 			$this->database = $this->connection->selectDB(DBConnect::DBNAME);
 		} catch (MongoConnectionException $e) { throw $e; }
 	}

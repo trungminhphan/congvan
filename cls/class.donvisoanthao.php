@@ -12,7 +12,8 @@ class DonViSoanThao{
 		$this->_collection = $this->_mongo->getCollection(DonViSoanThao::COLLECTION);
 	}
 	public function get_one(){
-		return $this->_collection->findOne(array('_id'=> new MongoId($this->id)));
+		$query = array('_id' => new MongoId($this->id));
+		return $this->_collection->findOne($query);
 	}
 	public function get_all_list(){
 		return $this->_collection->find()->sort(array('date_post'=> 1));

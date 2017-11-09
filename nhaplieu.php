@@ -15,6 +15,7 @@ if(isset($_POST['submit'])){
 	$trichyeu = isset($_POST['trichyeu']) ? $_POST['trichyeu'] : '';
 	$socongvan = isset($_POST['socongvan']) ? $_POST['socongvan'] : '';
 	$sothutu = isset($_POST['sothutu']) ? $_POST['sothutu'] : 0;
+	$nguoiky = isset($_POST['nguoiky']) ? $_POST['nguoiky'] : '';
 	$ngayky = isset($_POST['ngayky']) ? convert_date_dd_mm_yyyy($_POST['ngayky']) : '';
 	$ngaydiden = isset($_POST['ngaydiden']) ? convert_date_dd_mm_yyyy($_POST['ngaydiden']) : '';
 	$thoihanbaocao = isset($_POST['thoihanbaocao']) ? convert_date_dd_mm_yyyy($_POST['thoihanbaocao']) : '';
@@ -39,6 +40,7 @@ if(isset($_POST['submit'])){
 	$congvan->trichyeu = $trichyeu;
 	$congvan->socongvan = $socongvan; 
 	$congvan->sothutu = intval($sothutu); 
+	$congvan->nguoiky = $nguoiky;
 	$congvan->ngayky = $ngayky ? new MongoDate($ngayky) : '';
 	$congvan->ngaydiden = $ngaydiden ? new MongoDate($ngaydiden) : '';
 	$congvan->thoihanbaocao = $thoihanbaocao ? new MongoDate($thoihanbaocao) : '';
@@ -159,7 +161,7 @@ if(isset($_POST['submit'])){
 	</div>
 	<div class="row cells12">
 		<div class="cell colspan2 padding-top-10">Lĩnh vực</div>
-		<div class="cell colspan10 input-control select">
+		<div class="cell colspan4 input-control select">
 			<select name="id_linhvuc" id="id_linhvuc" class="select2">
 				<option value="">Lĩnh vực</option>
 				<?php
@@ -172,6 +174,10 @@ if(isset($_POST['submit'])){
 				?>
 			</select>
 		</div>
+		<div class="cell colspan2 padding-top-10">Số thứ tự</div>
+		<div class="cell colspan4 input-control input">
+			<input type="text" name="sothutu" id="sothutu" placeholder="Số thứ tự" />
+		</div> 
 	</div>
 	<div class="row cells12">
 		<div class="cell colspan2 padding-top-10">Trích yếu</div>
@@ -180,21 +186,21 @@ if(isset($_POST['submit'])){
 		</div> 
 	</div>
 	<div class="row cells12">
-		<div class="cell colspan2 padding-top-10">Số công văn</div>
+		<div class="cell colspan2 padding-top-10">Người ký</div>
 		<div class="cell colspan4 input-control input">
-			<input type="text" name="socongvan" id="socongvan" placeholder="Số công văn" />
+			<input type="text" name="nguoiky" id="nguoiky" placeholder="Người ký" />
 		</div> 
-		<div class="cell colspan2 padding-top-10">Số thứ tự</div>
-		<div class="cell colspan4 input-control input">
-			<input type="text" name="sothutu" id="sothutu" placeholder="Số thứ tự" />
-		</div> 
-	</div>
-	<div class="row cells12">
 		<div class="cell colspan2 padding-top-10">Ngày ký</div>
 		<div class="cell colspan4 align-left input-control text" data-role="datepicker" data-format="dd/mm/yyyy">
 			<input type="text" name="ngayky" id="ngayky" placeholder="Ngày ký" value="" data-inputmask="'alias': 'date'" class="ngaythangnam" />
                 <button class="button"><span class="mif-calendar"></span></button>
         </div>
+	</div>
+	<div class="row cells12">
+		<div class="cell colspan2 padding-top-10">Số công văn</div>
+		<div class="cell colspan4 input-control input">
+			<input type="text" name="socongvan" id="socongvan" placeholder="Số công văn" />
+		</div> 
 		<div class="cell colspan2 padding-top-10">Ngày đi/ngày đến</div>
 		<div class="cell colspan4 input-control text" data-role="datepicker" data-format="dd/mm/yyyy">
 			<input type="text" name="ngaydiden" id="ngaydiden" placeholder="Ngày đi/ngày đến" data-inputmask="'alias': 'date'" class="ngaythangnam"/>

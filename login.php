@@ -71,14 +71,15 @@ if(isset($_POST['login'])){
         });
     </script>
 </head>
-<body class="bg-blue-default">
+<body style="background-color: #067FD9;">
     <div class="login-form padding20 block-shadow">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" data-role="validator" data-show-required-state="false" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
             <h1 class="text-light">Đăng nhập hệ thống</h1>
+            <h4>Quản lý công văn Trường Đại học An Giang.</h4>
             <hr class="thin"/>
             <br />
             <div class="input-control text full-size" data-role="input">
-                <label for="user_login">User name:</label>
+                <label for="user_login">Tài khoản:</label>
                 <input type="text" name="username" id="username" value="<?php echo isset($username) ? $username : ''; ?>" data-validate-func="required" data-validate-hint="Vui lòng nhập tài khoản đăng nhập."/>
                 <span class="input-state-error mif-warning"></span>
                 <span class="input-state-success mif-checkmark"></span>
@@ -86,7 +87,7 @@ if(isset($_POST['login'])){
             <br />
             <br />
             <div class="input-control password full-size" data-role="input">
-                <label for="user_password">Password:</label>
+                <label for="user_password">Mật khẩu:</label>
                 <input type="password" name="password" id="password" data-validate-func="required" data-validate-hint="Vui lòng nhập mật khẩu đăng nhập." />
                 <span class="input-state-error mif-warning"></span>
                 <span class="input-state-success mif-checkmark"></span>

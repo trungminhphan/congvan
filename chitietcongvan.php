@@ -74,6 +74,12 @@ $loaivanban->id = $cv['id_loaicongvan'];$lvb = $loaivanban->get_one();
 		</td>
 	</tr>
 	<tr>
+		<td>Người ký</td>
+		<td>
+			<?php echo isset($cv['nguoiky']) ? $cv['nguoiky'] : ''; ?>
+		</td>
+	</tr>
+	<tr>
 		<td>Ngày ký</td>
 		<td>
 			<?php echo $cv['ngayky'] ? date("d/m/Y", $cv['ngayky']->sec) : ''; ?>

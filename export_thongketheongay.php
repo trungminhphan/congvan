@@ -1,13 +1,19 @@
 <?php
 require_once('header_none.php'); 
 require_once('cls/PHPExcel.php');
-$congvan = new CongVan();
-$loaivanban = new LoaiVanBan();
-
 $congvan = new CongVan();$loaicongvan = new LoaiVanBan();
 if(isset($_GET['submit'])){
+	$id_loaicongvan = isset($_GET['id_loaicongvan']) ? $_GET['id_loaicongvan'] : '';
 	$tungay = isset($_GET['tungay']) ? $_GET['tungay'] : '';
 	$denngay = isset($_GET['denngay']) ? $_GET['denngay'] : '';
+	$arr_query = array();$arr_congvan = array();
+	if($id_loaicongvan){
+		$list_congvan = $loaicongvan->get_list_condition(array('id_parent' => new MongoId($id_loaicongvan)));
+		foreach ($list_congvan as $key => $value) {
+			$arr_congvan[] = new MongoId($value['_id']);
+		}
+		array_push($arr_query, array('id_loaicongvan' => array('$in' => $arr_congvan)));
+	}
 	if(convert_date_dd_mm_yyyy($tungay) > convert_date_dd_mm_yyyy($denngay)){
 		$msg = 'Chọn sai ngày....';
 	} else {
@@ -16,7 +22,10 @@ if(isset($_GET['submit'])){
 		//$query = array(array('ngaydiden' => array('$gte' => $date1), 'ngaydiden' => array('$lte' => $date2)));
 		//$query = array('ngaydiden' => array('$gte' => $date1));
 		//$query = array('ngaydiden' => array('$lte' => $date2));
-		$query = array('$and' => array(array('ngaydiden' => array('$gte' => $date1)), array('ngaydiden' => array('$lte' => $date2))));
+		//$query = array('$and' => array(array('ngaydiden' => array('$gte' => $date1)), array('ngaydiden' => array('$lte' => $date2))));
+		array_push($arr_query, array('ngaydiden' => array('$gte' => $date1)));
+		array_push($arr_query, array('ngaydiden' => array('$lte' => $date2)));
+		$query = array('$and' => $arr_query);
 		$list = $congvan->get_list_condition($query);
 	}
 }
@@ -44,13 +53,21 @@ if(isset($list) && $list){
 		} else {
 			 $p = '';
 		}
-
-		$objPHPExcel->setActiveSheetIndex()->setCellValue('A'.$i, $stt);
-		$objPHPExcel->setActiveSheetIndex()->setCellValue('B'.$i, $l['socongvan']);
-		$objPHPExcel->setActiveSheetIndex()->setCellValue('C'.$i, $l['trichyeu']);
-		$objPHPExcel->setActiveSheetIndex()->setCellValue('D'.$i, $ngayky);
-		$objPHPExcel->setActiveSheetIndex()->setCellValue('E'.$i, $ngaydiden);
-		$objPHPExcel->setActiveSheetIndex()->setCellValue('F'.$i, $p ? $p : '');
+		if(isset($l['id_donvisoanthao']) && $l['id_donvisoanthao']){
+			$donvisoanthao = new DonViSoanThao();
+			$donvisoanthao->id = $l['id_donvisoanthao']; $dvst = $donvisoanthao->get_one();
+			$donvisoanthao = $dvst['ten'];
+		} else { $donvisoanthao = ''; }
+		
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('A'.$i, isset($l['sothutu']) ? $l['sothutu'] : '');
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('B'.$i, $l['trichyeu']);
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('C'.$i, $l['socongvan']);
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('D'.$i, $donvisoanthao);
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('E'.$i, isset($l['nguoiky']) ? $l['nguoiky'] : '');
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('F'.$i, $ngayky);
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('G'.$i, $ngaydiden);
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('H'.$i, $l['ghichu']);
+		$objPHPExcel->setActiveSheetIndex()->setCellValue('I'.$i, $p ? $p : '');
 		$i++;$stt++;
 	}
 }
